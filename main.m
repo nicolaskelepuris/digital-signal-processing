@@ -4,9 +4,7 @@ ler_e_discar_telefone()
 function gerar_arquivos_audio()
     frequencias_inferiores = [697 770 852 941];
     frequencias_superiores = [1209 1336 1477 1633];
-    asterisco = "asterisco";
-    jogo_da_velha = "jogo_da_velha";
-    teclas = ["1" "2" "3" "A"; "4" "5" "6" "B"; "7" "8" "9" "C"; asterisco "0" jogo_da_velha "D";];
+    teclas = ["1" "2" "3" "A"; "4" "5" "6" "B"; "7" "8" "9" "C"; "asterisco" "0" "jogo_da_velha" "D";];
     for linha = 1:1:size(teclas, 1)
         for coluna = 1:1:size(teclas, 2)
             frequencia_inferior = frequencias_inferiores(linha);
@@ -57,9 +55,9 @@ end
 function tecla = char_to_tecla(character)
     tecla = convertCharsToStrings(character);
     if (tecla == "*")
-        tecla = asterisco;
+        tecla = "asterisco";
     end
     if (tecla == "#")
-        tecla = jogo_da_velha;
+        tecla = "jogo_da_velha";
     end
 end
