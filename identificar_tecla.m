@@ -27,12 +27,16 @@ end
 function [fft_sinal_entrada, f, N] = filtrar(b, a, nome_arquivo, duracao)
     w = 0:pi/1000:pi; %determina um eixo para freq
     h = freqs(b,a,w); %calcula a resposta em freq do filtro
-    subplot(2,1,1); plot(w/pi,abs(h)); hold on; title('resposta dominio frequencia analogico');
+    subplot(2, 3, 1);
+    plot(w/pi,abs(h));
+    title('resposta dominio frequencia analogico');
 
     T = 1;
     [bz, az] = bilinear(b,a,T);
     hz = freqz(bz,az,w);
-    subplot(2,1,2); plot(w/pi,abs(hz)); hold on; title('resposta dominio frequencia digital');
+    subplot(2, 3, 2);
+    plot(w/pi,abs(hz));
+    title('resposta dominio frequencia digital');
 
     [entrada_discretizada,Fs] = audioread(nome_arquivo);
     sinal_filtrado = filter(b, a, entrada_discretizada);
@@ -44,7 +48,12 @@ function [fft_sinal_entrada, f, N] = filtrar(b, a, nome_arquivo, duracao)
     fft_sinal_filtrado = abs(fft(sinal_filtrado)/N);
     f_resol = Fs/N;
     f = n.*f_resol;
-    subplot(1,2,1); plot(entrada_discretizada); hold on; plot(sinal_filtrado,'r');
-    subplot(1,2,2); plot(f(1:N/2), fft_sinal_entrada(1:N/2)); hold on;
+    subplot(2, 3, 3);
+    plot(entrada_discretizada);
+    subplot(2, 3, 4);
+    plot(sinal_filtrado,'r');
+    subplot(2, 3, 5);
+    plot(f(1:N/2), fft_sinal_entrada(1:N/2));
+    subplot(2, 3, 6);
     plot(f(1:N/2),fft_sinal_filtrado(1:N/2),'r');
 end
