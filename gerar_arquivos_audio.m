@@ -1,19 +1,15 @@
-function gerar_arquivos_audio()
-    frequencias_inferiores = [697 770 852 941];
-    frequencias_superiores = [1209 1336 1477 1633];
-    teclas = ["1" "2" "3" "A"; "4" "5" "6" "B"; "7" "8" "9" "C"; "asterisco" "0" "jogo_da_velha" "D";];
+function gerar_arquivos_audio(duracao, frequencias_inferiores, frequencias_superiores, teclas)
     for linha = 1:1:size(teclas, 1)
         for coluna = 1:1:size(teclas, 2)
             frequencia_inferior = frequencias_inferiores(linha);
             frequencia_superior = frequencias_superiores(coluna);
             tecla = teclas(linha, coluna);
-            gerar_audio_tecla(frequencia_inferior, frequencia_superior, tecla);
+            gerar_audio_tecla(duracao, frequencia_inferior, frequencia_superior, tecla);
         end
     end
 end
 
-function gerar_audio_tecla(frequencia_inferior, frequencia_superior, tecla)
-    duracao = 0.2; % segundos
+function gerar_audio_tecla(duracao, frequencia_inferior, frequencia_superior, tecla)
     frequencia_amostragem = 8000; % Hz
     
     sinal_inferior = gerar_sinal(frequencia_inferior, duracao, frequencia_amostragem);
